@@ -2,6 +2,12 @@ import Button from "../components/Button";
 import Field from "../components/Field";
 
 function LoginPage(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   return (
     <div className="flex flex-col min-h-screen">
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
