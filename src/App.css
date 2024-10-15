@@ -26,7 +26,6 @@ button:
   border-radius: 16px !important;
   background-color: #e2e2e7 !important;
   text-indent: -0px !important;
-  border-color: transparent !important;
 }
 
 .field::placeholder {

@@ -1,9 +1,17 @@
 function Button(props) {
-    return (
-        <a className="text-center text-sky-400/100 rounded-full bg-blue-600 text-white font-semibold px-8 py-4" href={props.link}>
-            {props.text}
-        </a>
-    );
+  return (
+    <button
+      onClick={props.onClick}
+      disabled={props.disabled}
+      className={`text-center rounded-full font-semibold px-8 py-4 ${
+        props.disabled
+          ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+          : "bg-blue-600 text-white hover:bg-blue-700"
+      }`}
+    >
+      {props.text}
+    </button>
+  );
 }
 
 export default Button;

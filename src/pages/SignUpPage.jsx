@@ -1,101 +1,141 @@
+import { useState } from "react";
 import Button from "../components/Button";
 import Field from "../components/Field";
+import Layout from "../components/Layout";
+import "../responsive.css";
 
-const SignUpPage = (props) => {
+const SignUpPage = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [errors, setErrors] = useState({
+    emailError: "",
+    passwordError: "",
+  });
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    // Clear errors for the respective field when the user types
+    if (name === "email") {
+      setErrors((prevErrors) => ({ ...prevErrors, emailError: "" }));
+    }
+    if (name === "confirmPassword" || name === "password") {
+      setErrors((prevErrors) => ({ ...prevErrors, passwordError: "" }));
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    let valid = true;
+    let newErrors = { emailError: "", passwordError: "" };
+
+    // Validate email
+    if (!emailRegex.test(formData.email)) {
+      newErrors.emailError = "Please enter a valid email.";
+      valid = false;
+    }
+
+    // Validate password match
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.passwordError = "Passwords do not match.";
+      valid = false;
+    }
+
+    // Set errors if any
+    setErrors(newErrors);
+
+    // If form is valid, proceed with form submission
+    if (valid) {
+      console.log("Form Data:", formData);
+      // Your form submission logic (e.g., API call) goes here
+    }
+  };
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
-        <div className="flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="https://flowbite.com/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Evaluni
-            </span>
-          </a>
-          <button
-            data-collapse-toggle="navbar-default"
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-default"
-            aria-expanded="false"
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
-        </div>
-      </nav>
-
+    <Layout>
       <div className="flex-grow flex items-center justify-center">
         <div className="w-1/5 mx-auto">
           <h1 className="text-5xl font-medium mb-2">Welcome</h1>
           <p className="text-gray-600 ml-1 mb-3">
-            Enter the all necesseray details to create new account.
+            Enter the email and password to access to the account
           </p>
-          <div className="flex flex-col gap-4">
-            <Field text="Name" />
-            <Field text="Surname" />
-            <Field text="Email" />
-            <Field text="Password" />
-            <Field text="Password" />
-            <a href="/login" className="ml-1 text-blue-600 font-medium">
-              Already have account?
-            </a>
-            {/* TODO: Disable button */}
-            <Button text="Continue" link="12" />
-          </div>
+          {errors.emailError && (
+            <p className="ml-1 text-red-500 text-sm mb-1 font-semibold">
+              {errors.emailError}
+            </p>
+          )}
+          {errors.passwordError && (
+            <p className="ml-1 text-red-500 text-sm mb-1 font-semibold">
+              {errors.passwordError}
+            </p>
+          )}
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <Field
+              text="Name"
+              name="name"
+              value={formData.name} // Controlled input
+              onChange={handleInputChange}
+            />
+            <Field
+              text="Surname"
+              name="surname"
+              value={formData.surname} // Controlled input
+              onChange={handleInputChange}
+            />
+
+            <Field
+              text="Email"
+              type="email"
+              name="email"
+              red={!!errors.emailError}
+              value={formData.email} // Controlled input
+              onChange={handleInputChange}
+            />
+
+            <Field
+              text="Password"
+              type="password"
+              name="password"
+              value={formData.password}
+              red={!!errors.passwordError} // Controlled input
+              onChange={handleInputChange}
+            />
+            <Field
+              text="Confirm Password"
+              type="password"
+              name="confirmPassword"
+              red={!!errors.passwordError}
+              value={formData.confirmPassword} // Controlled input
+              onChange={handleInputChange}
+            />
+            <Button
+              text="Sign up"
+              onClick={handleSubmit}
+              disabled={
+                !formData.name ||
+                !formData.surname ||
+                !formData.email ||
+                !formData.password ||
+                !formData.confirmPassword
+              }
+            />
+          </form>
         </div>
       </div>
-
-      <footer className="bg-white rounded-lg m-4 dark:bg-gray-800">
-        <div className="w-full mx-auto p-4 md:flex md:items-center md:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2024{" "}
-            <a href="https://flowbite.com/" className="hover:underline">
-              Evaluni™
-            </a>
-            . All Rights Reserved.
-          </span>
-          <ul className="flex flex-wrap items-center gap-8 mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
-            <li>
-              <a href="#" className="hover:underline me-4 md:me-6">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline me-4 md:me-6">
-                Privacy Policy
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline me-4 md:me-6">
-                Licensing
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 };
 
