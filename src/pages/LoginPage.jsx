@@ -1,6 +1,7 @@
 import Button from "../components/Button";
 import Field from "../components/Field";
 import { useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import Layout from "../components/Layout";
 
 function LoginPage(props) {
@@ -24,12 +25,30 @@ function LoginPage(props) {
     }
   };
 
+  const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
+  const isRetina = useMediaQuery({ query: "(max-width: 600px)" });
+
   return (
     <Layout>
       <div className="flex-grow flex items-center justify-center">
-        <div className="w-1/5 mx-auto">
-          <h1 className="text-5xl font-medium mb-2">Welcome back</h1>
-          <p className="text-gray-600 ml-1 mb-3">
+        <div
+          className={`mx-auto ${
+            isRetina ? "w-full px-4" : isBigScreen ? "w-1/4" : "w-1/5"
+          }`}
+        >
+          <h1
+            className={`font-medium mb-2 ${
+              isBigScreen ? "text-7xl" : "text-5xl"
+            }  `}
+          >
+            Welcome back
+          </h1>
+          {/* font sizes  for big screen */}
+          <p
+            className={`text-gray-600 ml-1 mb-3 ${
+              isBigScreen ? "text-lg" : "text-base"
+            }`}
+          >
             Enter the email and password to access to the account
           </p>
           <div className="flex flex-col gap-4">
