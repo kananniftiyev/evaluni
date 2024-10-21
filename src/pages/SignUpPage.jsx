@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import Field from "../components/Field";
 import Layout from "../components/Layout";
 import { useMediaQuery } from "react-responsive";
+import axios from "axios";
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -36,7 +37,7 @@ const SignUpPage = () => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     let valid = true;
@@ -57,10 +58,51 @@ const SignUpPage = () => {
     // Set errors if any
     setErrors(newErrors);
 
-    // If form is valid, proceed with form submission
+    // If form is valid, proceed with checking for existing email
     if (valid) {
-      console.log("Form Data:", formData);
-      // Your form submission logic (e.g., API call) goes here
+      try {
+        // First, check if the email already exists
+        const response = await axios.get("http://localhost:3000/users");
+        const existingUsers = response.data;
+
+        const userExists = existingUsers.some(
+          (user) => user.email === formData.email
+        );
+
+        if (userExists) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            emailError: "Email is already registered.",
+          }));
+        } else {
+          // Proceed with registration if email is not taken
+          const newUser = {
+            name: formData.name,
+            surname: formData.surname,
+            email: formData.email,
+            password: formData.password, // In a real app, encrypt this!
+            role: "student", // Assuming the role is 'student'
+          };
+
+          const postResponse = await axios.post(
+            "http://localhost:3000/users",
+            newUser,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          if (postResponse.status === 201) {
+            console.log("User registered successfully:", postResponse.data);
+          } else {
+            console.error("Failed to register user.");
+          }
+        }
+      } catch (error) {
+        console.error("Error during the request:", error);
+      }
     }
   };
 

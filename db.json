@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "kanan",
+      "surname": "niftiyev",
+      "email:": "kanan@gmail.com",
+      "password": 123,
+      "role": "student"
+    },
+    {
+      "id": "2d2a",
+      "name": "kanan",
+      "surname": "kanan",
+      "email": "kananniftiyev010@gmail.com",
+      "password": "123",
+      "role": "student"
+    }
+  ],
+  "questions": [],
+  "tests": [],
+  "results": []
+}

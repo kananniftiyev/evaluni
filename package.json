@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@miyauci/react-router": "npm:@jsr/miyauci__react-router@^1.2.0",
+    "axios": "^1.7.7",
+    "bcrypt": "^5.1.1",
+    "json-server": "^1.0.0-beta.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-responsive": "^10.0.0",
