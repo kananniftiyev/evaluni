@@ -4,12 +4,14 @@ import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import Layout from "../components/Layout";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [loginError, setLoginError] = useState("");
+  const navigate = useNavigate();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -35,9 +37,6 @@ function LoginPage(props) {
       // Find the user with the matching email
       const user = users.find((user) => user.email === email);
 
-      console.log("Fetched Users:", users);
-      console.log("User:", user);
-
       if (!user) {
         setLoginError("User with this email does not exist.");
       } else if (user.password !== password) {
@@ -45,8 +44,9 @@ function LoginPage(props) {
       } else {
         // Successfully logged in
         console.log("User logged in successfully:", user);
-        setLoginError(""); // Clear error on successful login
-        // You can redirect to another page or handle login state here
+        setLoginError("");
+        localStorage.setItem("user", JSON.stringify(user)); // Store user data in localStorage
+        navigate('/dashboard')
       }
     } catch (error) {
       console.error("Error fetching users:", error);

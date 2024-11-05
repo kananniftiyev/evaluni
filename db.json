@@ -4,8 +4,8 @@
       "id": "1",
       "name": "kanan",
       "surname": "niftiyev",
-      "email:": "kanan@gmail.com",
-      "password": 123,
+      "email": "kanan@gmail.com",
+      "password": "123",
       "role": "student"
     },
     {
@@ -13,11 +13,58 @@
       "name": "kanan",
       "surname": "kanan",
       "email": "kananniftiyev010@gmail.com",
-      "password": "123",
-      "role": "student"
-    }
+      "password": "123"    }
   ],
-  "questions": [],
-  "tests": [],
-  "results": []
+  "exams": [
+    {
+      "id": "exam1",
+      "title": "Sample Exam 1",
+      "description": "This is a sample exam description.",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "multiple-choice",
+          "question": "What is the capital of France?",
+          "options": [
+            { "id": "a", "text": "Berlin" },
+            { "id": "b", "text": "Madrid" },
+            { "id": "c", "text": "Paris" },
+            { "id": "d", "text": "Rome" }
+          ],
+          "correctAnswer": "c"
+        },
+        {
+          "id": "q2",
+          "type": "open-ended",
+          "question": "Explain the significance of the capital city.",
+          "correctAnswer": "Open-ended answer."
+        }
+      ]
+    },
+    {
+      "id": "exam2",
+      "title": "Sample Exam 2",
+      "description": "This is another sample exam.",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "multiple-choice",
+          "question": "Which planet is known as the Red Planet?",
+          "options": [
+            { "id": "a", "text": "Earth" },
+            { "id": "b", "text": "Mars" },
+            { "id": "c", "text": "Jupiter" },
+            { "id": "d", "text": "Saturn" }
+          ],
+          "correctAnswer": "b"
+        },
+        {
+          "id": "q2",
+          "type": "open-ended",
+          "question": "Describe the process of photosynthesis.",
+          "correctAnswer": "Open-ended answer."
+        }
+      ]
+    }
+  ]
 }

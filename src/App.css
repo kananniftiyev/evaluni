@@ -1,19 +1,4 @@
-/*
-Colors:
-  
 
-
-
-
-field: 
- border-radius: 16px
- background-color: #E2E2E7
- 
-button: 
- border-radius: 999px
- color:
-
-*/
 
 .custom-container {
   margin-left: 36px;
@@ -23,7 +8,7 @@ button:
 }
 
 .field {
-  border-radius: 16px !important;
+  border-radius: 8px !important;
   background-color: #e2e2e7 !important;
   text-indent: -0px !important;
 }
@@ -31,4 +16,34 @@ button:
 .field::placeholder {
   color: #717173 !important;
   font-weight: 500 !important;
+}
+
+.navbar{
+  background-color: #111111 !important;
+}
+
+.dashboard{}
+
+
+/* App.css */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
 }
