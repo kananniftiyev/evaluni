@@ -228,6 +228,35 @@
       "score": 1,
       "submittedAt": "2024-11-10T12:30:00Z",
       "id": "f53d"
+    },
+    {
+      "id": "4f0d",
+      "userId": "2d2a",
+      "examId": "exam1730824437812",
+      "answers": [
+        {
+          "questionId": "q4",
+          "selectedOption": "d"
+        },
+        {
+          "questionId": "q3",
+          "selectedOption": "b"
+        },
+        {
+          "questionId": "q2",
+          "selectedOption": "a"
+        },
+        {
+          "questionId": "q1",
+          "selectedOption": "d"
+        },
+        {
+          "questionId": "q5",
+          "selectedOption": "s"
+        }
+      ],
+      "score": 0,
+      "submittedAt": "2024-11-05T18:15:50.777Z"
     }
   ]
 }

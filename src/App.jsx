@@ -8,6 +8,8 @@ import IndexPage from "./pages/IndexPage";
 import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import CreateExamPage from "./pages/CreateExam";
+import ExamPage from "./pages/ExamPage";
+import PublicRoute from "./PublicRoute";
 
 
 function App() {
@@ -15,10 +17,11 @@ function App() {
     <Router>
       <Routes>
         <Route path="/dashboard/new" element={<ProtectedRoute element={<CreateExamPage/>} />} />
+        <Route path="/exam/:id" element={<ProtectedRoute element={<ExamPage/>} />} />
         <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard/>} />} />
-        <Route path="" element={<IndexPage/>} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<SignUpPage />} />
+        <Route path="/" element={<IndexPage/>} />
+        <Route path="login" element={<PublicRoute element={<LoginPage />} />} /> {/* Protected as Public */}
+        <Route path="register" element={<PublicRoute element={<SignUpPage />} />} /> {/* Protected as Public */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

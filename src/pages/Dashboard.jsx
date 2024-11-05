@@ -5,10 +5,11 @@ import Button from '../components/Button';
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [exams, setExams] = useState([]);
-  const [userExams, setUserExams] = useState([]); // Store user's submitted exams
+  const [userExams, setUserExams] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
+  // Fetch and set user only once
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
     if (loggedInUser) {
@@ -16,14 +17,20 @@ const Dashboard = () => {
     } else {
       navigate('/login');
     }
+  }, [navigate]);
 
-    // Fetch exams and results in parallel
+  // Fetch exams and results only when `user` is set
+  useEffect(() => {
+    if (!user) return;
+
     const fetchData = async () => {
       try {
-        const examsResponse = await fetch('http://localhost:3000/exams');
-        const examsData = await examsResponse.json();
+        const [examsResponse, resultsResponse] = await Promise.all([
+          fetch('http://localhost:3000/exams'),
+          fetch('http://localhost:3000/results'),
+        ]);
 
-        const resultsResponse = await fetch('http://localhost:3000/results');
+        const examsData = await examsResponse.json();
         const resultsData = await resultsResponse.json();
 
         // Filter results for the logged-in user
@@ -47,7 +54,7 @@ const Dashboard = () => {
     };
 
     fetchData();
-  }, [navigate, user]);
+  }, [user]); // Only re-run when `user` changes
 
   const handleLogout = () => {
     localStorage.removeItem('user');
