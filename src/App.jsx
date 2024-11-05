@@ -10,12 +10,14 @@ import Dashboard from "./pages/Dashboard";
 import CreateExamPage from "./pages/CreateExam";
 import ExamPage from "./pages/ExamPage";
 import PublicRoute from "./PublicRoute";
+import ExamResultPage from "./pages/ExamResultPage";
 
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/exam/:id/view" element={<ProtectedRoute element={<ExamResultPage />} />} />
         <Route path="/dashboard/new" element={<ProtectedRoute element={<CreateExamPage/>} />} />
         <Route path="/exam/:id" element={<ProtectedRoute element={<ExamPage/>} />} />
         <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard/>} />} />

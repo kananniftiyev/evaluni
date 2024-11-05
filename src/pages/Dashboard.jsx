@@ -43,7 +43,7 @@ const Dashboard = () => {
             ...exam,
             score: result.score,
             submittedAt: result.submittedAt,
-            id: result.id,
+            id: exam.id,
           };
         });
 
@@ -125,7 +125,11 @@ const Dashboard = () => {
                   <p className="text-gray-600">{exam.description}</p>
                   <p className="text-gray-600">Score: {exam.score}</p>
                   <p className="text-gray-600">Submitted At: {new Date(exam.submittedAt).toLocaleString()}</p>
-                  <Button text="View Exam" onClick={() => navigate(`/exam/${exam.id}`)} />
+                  <Button text="View Exam" onClick={() => {
+    console.log(`Navigating to /exam/${exam.id}/view`);
+    navigate(`/exam/${exam.id}/view`);
+}} />
+
                 </li>
               ))
             ) : (
