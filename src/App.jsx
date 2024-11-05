@@ -7,11 +7,14 @@ import NotFound from "./pages/NotFound";
 import IndexPage from "./pages/IndexPage";
 import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
+import CreateExamPage from "./pages/CreateExam";
+
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/dashboard/new" element={<ProtectedRoute element={<CreateExamPage/>} />} />
         <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard/>} />} />
         <Route path="" element={<IndexPage/>} />
         <Route path="login" element={<LoginPage />} />

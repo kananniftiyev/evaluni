@@ -5,6 +5,7 @@ import Button from '../components/Button';
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [exams, setExams] = useState([]);
+  const [userExams, setUserExams] = useState([]); // Store user's submitted exams
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
@@ -16,10 +17,37 @@ const Dashboard = () => {
       navigate('/login');
     }
 
-    fetch('http://localhost:3000/exams')
-      .then(response => response.json())
-      .then(data => setExams(data));
-  }, [navigate]);
+    // Fetch exams and results in parallel
+    const fetchData = async () => {
+      try {
+        const examsResponse = await fetch('http://localhost:3000/exams');
+        const examsData = await examsResponse.json();
+
+        const resultsResponse = await fetch('http://localhost:3000/results');
+        const resultsData = await resultsResponse.json();
+
+        // Filter results for the logged-in user
+        const userResults = resultsData.filter(result => result.userId === user.id);
+
+        // Map user results to their corresponding exams
+        const submittedExams = userResults.map(result => {
+          const exam = examsData.find(exam => exam.id === result.examId);
+          return {
+            ...exam,
+            score: result.score,
+            submittedAt: result.submittedAt,
+            id: result.id,
+          };
+        });
+
+        setUserExams(submittedExams);
+      } catch (error) {
+        console.error('Error fetching exams or results:', error);
+      }
+    };
+
+    fetchData();
+  }, [navigate, user]);
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -27,13 +55,13 @@ const Dashboard = () => {
   };
 
   const handleCreateExam = () => {
-    navigate('/dashboard/newExam');
+    navigate('/dashboard/new');
   };
 
   return (
     <div className="dashboard min-h-screen bg-gray-100">
       <nav className="navbar text-white p-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center ">
+        <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-bold cursor-pointer" onClick={() => navigate('/')}>
             Evaluni Dashboard
           </h1>
@@ -83,13 +111,19 @@ const Dashboard = () => {
         <div>
           <h3 className="text-lg font-semibold mb-2">Past Exams</h3>
           <ul className="space-y-4">
-            {exams.map(exam => (
-              <li key={exam.id} className="bg-white p-4 rounded shadow">
-                <h4 className="text-md font-semibold">{exam.name}</h4>
-                <p className="text-gray-600">{exam.description}</p>
-                <Button text="View Exam" onClick={() => navigate(`/exam/${exam.id}`)} />
-              </li>
-            ))}
+            {userExams.length > 0 ? (
+              userExams.map(exam => (
+                <li key={exam.id} className="bg-white p-4 rounded shadow">
+                  <h4 className="text-md font-semibold">{exam.title}</h4>
+                  <p className="text-gray-600">{exam.description}</p>
+                  <p className="text-gray-600">Score: {exam.score}</p>
+                  <p className="text-gray-600">Submitted At: {new Date(exam.submittedAt).toLocaleString()}</p>
+                  <Button text="View Exam" onClick={() => navigate(`/exam/${exam.id}`)} />
+                </li>
+              ))
+            ) : (
+              <p>No past exams found.</p>
+            )}
           </ul>
         </div>
       </main>

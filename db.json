@@ -13,23 +13,39 @@
       "name": "kanan",
       "surname": "kanan",
       "email": "kananniftiyev010@gmail.com",
-      "password": "123"    }
+      "password": "123",
+      "role": "student"
+    }
   ],
   "exams": [
     {
       "id": "exam1",
       "title": "Sample Exam 1",
       "description": "This is a sample exam description.",
+      "startDate": "2024-11-10T10:00:00Z",
+      "endDate": "2024-11-10T12:00:00Z",
       "questions": [
         {
           "id": "q1",
           "type": "multiple-choice",
           "question": "What is the capital of France?",
           "options": [
-            { "id": "a", "text": "Berlin" },
-            { "id": "b", "text": "Madrid" },
-            { "id": "c", "text": "Paris" },
-            { "id": "d", "text": "Rome" }
+            {
+              "id": "a",
+              "text": "Berlin"
+            },
+            {
+              "id": "b",
+              "text": "Madrid"
+            },
+            {
+              "id": "c",
+              "text": "Paris"
+            },
+            {
+              "id": "d",
+              "text": "Rome"
+            }
           ],
           "correctAnswer": "c"
         },
@@ -39,22 +55,37 @@
           "question": "Explain the significance of the capital city.",
           "correctAnswer": "Open-ended answer."
         }
-      ]
+      ],
+      "results": []
     },
     {
       "id": "exam2",
       "title": "Sample Exam 2",
       "description": "This is another sample exam.",
+      "startDate": "2024-11-15T10:00:00Z",
+      "endDate": "2024-11-15T12:00:00Z",
       "questions": [
         {
           "id": "q1",
           "type": "multiple-choice",
           "question": "Which planet is known as the Red Planet?",
           "options": [
-            { "id": "a", "text": "Earth" },
-            { "id": "b", "text": "Mars" },
-            { "id": "c", "text": "Jupiter" },
-            { "id": "d", "text": "Saturn" }
+            {
+              "id": "a",
+              "text": "Earth"
+            },
+            {
+              "id": "b",
+              "text": "Mars"
+            },
+            {
+              "id": "c",
+              "text": "Jupiter"
+            },
+            {
+              "id": "d",
+              "text": "Saturn"
+            }
           ],
           "correctAnswer": "b"
         },
@@ -64,7 +95,139 @@
           "question": "Describe the process of photosynthesis.",
           "correctAnswer": "Open-ended answer."
         }
-      ]
+      ],
+      "results": []
+    },
+    {
+      "id": "exam1730824437812",
+      "title": "kanan",
+      "description": "kanan123",
+      "startDate": "2024-11-05T16:33:57.812Z",
+      "endDate": "2024-11-05T17:33:57.812Z",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "multiple-choice",
+          "question": "What is the largest ocean on Earth?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Pacific"
+            },
+            {
+              "id": "b",
+              "text": "Atlantic"
+            },
+            {
+              "id": "c",
+              "text": "Indian"
+            },
+            {
+              "id": "d",
+              "text": "Arctic"
+            }
+          ],
+          "correctAnswer": "Pacific"
+        },
+        {
+          "id": "q2",
+          "type": "multiple-choice",
+          "question": "Which is the smallest continent?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Australia"
+            },
+            {
+              "id": "b",
+              "text": "Europe"
+            },
+            {
+              "id": "c",
+              "text": "Asia"
+            },
+            {
+              "id": "d",
+              "text": "Africa"
+            }
+          ],
+          "correctAnswer": "Australia"
+        },
+        {
+          "id": "q3",
+          "type": "multiple-choice",
+          "question": "What is the chemical symbol for gold?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Au"
+            },
+            {
+              "id": "b",
+              "text": "Ag"
+            },
+            {
+              "id": "c",
+              "text": "Fe"
+            },
+            {
+              "id": "d",
+              "text": "Hg"
+            }
+          ],
+          "correctAnswer": "Au"
+        },
+        {
+          "id": "q4",
+          "type": "multiple-choice",
+          "question": "Who wrote 'Romeo and Juliet'?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Shakespeare"
+            },
+            {
+              "id": "b",
+              "text": "Moliere"
+            },
+            {
+              "id": "c",
+              "text": "Dante"
+            },
+            {
+              "id": "d",
+              "text": "Chaucer"
+            }
+          ],
+          "correctAnswer": "Shakespeare"
+        },
+        {
+          "id": "q5",
+          "type": "open-ended",
+          "question": "Describe your favorite book and why you like it.",
+          "correctAnswer": "Open-ended answer."
+        }
+      ],
+      "results": []
+    }
+  ],
+  "results": [
+    {
+      "userId": "1",
+      "examId": "exam1",
+      "answers": [
+        {
+          "questionId": "q1",
+          "selectedOption": "c"
+        },
+        {
+          "questionId": "q2",
+          "answer": "The capital of France is significant because..."
+        }
+      ],
+      "score": 1,
+      "submittedAt": "2024-11-10T12:30:00Z",
+      "id": "f53d"
     }
   ]
 }

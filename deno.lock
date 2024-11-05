@@ -2394,6 +2394,7 @@
         "npm:eslint@^9.11.1",
         "npm:globals@^15.9.0",
         "npm:json-server@^1.0.0-beta.3",
+        "npm:papaparse@^5.4.1",
         "npm:react-dom@^18.3.1",
         "npm:react-responsive@10",
         "npm:react-router-dom@^6.26.2",
