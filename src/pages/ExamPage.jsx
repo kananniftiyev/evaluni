@@ -8,6 +8,7 @@ const ExamPage = () => {
   const [exam, setExam] = useState(null);
   const [answers, setAnswers] = useState({});
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
+  const [isExamOpen, setIsExamOpen] = useState(true); // To track if the exam is open for submission
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +32,16 @@ const ExamPage = () => {
         const userResult = resultsData.find(result => result.userId === loggedInUser.id && result.examId === id);
         
         if (userResult) setAlreadySubmitted(true); // If result exists, user has already submitted
+
+        // Check if the exam is open for submission
+        const currentTime = new Date();
+        const startTime = new Date(examData.startDate);
+        const endTime = new Date(examData.endDate);
+
+        // If the current time is before the start date or after the deadline, the exam is closed
+        if (currentTime < startTime || currentTime > endTime) {
+          setIsExamOpen(false);
+        }
       } catch (error) {
         console.error(error);
         navigate('/dashboard'); // Redirect to dashboard if exam is not found
@@ -49,7 +60,7 @@ const ExamPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (alreadySubmitted) return;
+    if (alreadySubmitted || !isExamOpen) return;
 
     // Process the answers and send to server
     const response = await fetch('http://localhost:3000/results', {
@@ -76,9 +87,15 @@ const ExamPage = () => {
     <div className="exam-page p-4">
       <h1 className="text-2xl font-semibold mb-4">{exam.title}</h1>
       <p className="mb-4">{exam.description}</p>
+
+      {/* Show if the exam is not open for submission */}
+      {!isExamOpen && (
+        <p className="text-red-500">The exam is not available for submission. It may have already ended or hasn't started yet.</p>
+      )}
+
       {alreadySubmitted ? (
         <p className="text-red-500">You have already submitted this exam.</p>
-      ) : (
+      ) : isExamOpen ? (
         <form onSubmit={handleSubmit}>
           {exam.questions.map(question => (
             <div key={question.id} className="mb-4">
@@ -107,9 +124,9 @@ const ExamPage = () => {
               )}
             </div>
           ))}
-          <Button text="Submit Answers" type="submit" disabled={alreadySubmitted} />
+          <Button text="Submit Answers" type="submit" disabled={alreadySubmitted || !isExamOpen} />
         </form>
-      )}
+      ) : null}
     </div>
   );
 };

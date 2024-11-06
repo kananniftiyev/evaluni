@@ -24,6 +24,7 @@
       "description": "This is a sample exam description.",
       "startDate": "2024-11-10T10:00:00Z",
       "endDate": "2024-11-10T12:00:00Z",
+      "creatorId": "2s",
       "questions": [
         {
           "id": "q1",
@@ -64,6 +65,7 @@
       "description": "This is another sample exam.",
       "startDate": "2024-11-15T10:00:00Z",
       "endDate": "2024-11-15T12:00:00Z",
+      "creatorId": "12",
       "questions": [
         {
           "id": "q1",
@@ -104,6 +106,7 @@
       "description": "kanan123",
       "startDate": "2024-11-05T16:33:57.812Z",
       "endDate": "2024-11-05T17:33:57.812Z",
+      "creatorId": "2d2a",
       "questions": [
         {
           "id": "q1",
@@ -209,6 +212,119 @@
         }
       ],
       "results": []
+    },
+    {
+      "id": "exam1730900687812",
+      "title": "asdas",
+      "description": "asdsad",
+      "startDate": "2024-11-07T05:06:00.000Z",
+      "endDate": "2024-11-29T04:05:00.000Z",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "multiple-choice",
+          "question": "What is the largest ocean on Earth?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Pacific"
+            },
+            {
+              "id": "b",
+              "text": "Atlantic"
+            },
+            {
+              "id": "c",
+              "text": "Indian"
+            },
+            {
+              "id": "d",
+              "text": "Arctic"
+            }
+          ],
+          "correctAnswer": "Pacific"
+        },
+        {
+          "id": "q2",
+          "type": "multiple-choice",
+          "question": "Which is the smallest continent?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Australia"
+            },
+            {
+              "id": "b",
+              "text": "Europe"
+            },
+            {
+              "id": "c",
+              "text": "Asia"
+            },
+            {
+              "id": "d",
+              "text": "Africa"
+            }
+          ],
+          "correctAnswer": "Australia"
+        },
+        {
+          "id": "q3",
+          "type": "multiple-choice",
+          "question": "What is the chemical symbol for gold?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Au"
+            },
+            {
+              "id": "b",
+              "text": "Ag"
+            },
+            {
+              "id": "c",
+              "text": "Fe"
+            },
+            {
+              "id": "d",
+              "text": "Hg"
+            }
+          ],
+          "correctAnswer": "Au"
+        },
+        {
+          "id": "q4",
+          "type": "multiple-choice",
+          "question": "Who wrote 'Romeo and Juliet'?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Shakespeare"
+            },
+            {
+              "id": "b",
+              "text": "Moliere"
+            },
+            {
+              "id": "c",
+              "text": "Dante"
+            },
+            {
+              "id": "d",
+              "text": "Chaucer"
+            }
+          ],
+          "correctAnswer": "Shakespeare"
+        },
+        {
+          "id": "q5",
+          "type": "open-ended",
+          "question": "Describe your favorite book and why you like it.",
+          "correctAnswer": "Open-ended answer."
+        }
+      ],
+      "results": [],
+      "creatorId": "2d2a"
     }
   ],
   "results": [

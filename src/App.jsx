@@ -11,19 +11,43 @@ import CreateExamPage from "./pages/CreateExam";
 import ExamPage from "./pages/ExamPage";
 import PublicRoute from "./PublicRoute";
 import ExamResultPage from "./pages/ExamResultPage";
-
+import MyExamsPage from "./pages/MyExamsPage";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/exam/:id/view" element={<ProtectedRoute element={<ExamResultPage />} />} />
-        <Route path="/dashboard/new" element={<ProtectedRoute element={<CreateExamPage/>} />} />
-        <Route path="/exam/:id" element={<ProtectedRoute element={<ExamPage/>} />} />
-        <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard/>} />} />
-        <Route path="/" element={<IndexPage/>} />
-        <Route path="login" element={<PublicRoute element={<LoginPage />} />} /> {/* Protected as Public */}
-        <Route path="register" element={<PublicRoute element={<SignUpPage />} />} /> {/* Protected as Public */}
+        <Route
+          path="/exam/:id/view"
+          element={<ProtectedRoute element={<ExamResultPage />} />}
+        />
+        <Route
+          path="/dashboard/new"
+          element={<ProtectedRoute element={<CreateExamPage />} />}
+        />
+        <Route
+          path="/exam/:id"
+          element={<ProtectedRoute element={<ExamPage />} />}
+        />
+        <Route
+          path="/dashboard"
+          element={<ProtectedRoute element={<Dashboard />} />}
+        />
+        <Route
+          path="/dashboard/my-exams"
+          element={<ProtectedRoute element={<MyExamsPage />} />}
+        />
+        <Route path="/" element={<IndexPage />} />
+        <Route
+          path="login"
+          element={<PublicRoute element={<LoginPage />} />}
+        />{" "}
+        {/* Protected as Public */}
+        <Route
+          path="register"
+          element={<PublicRoute element={<SignUpPage />} />}
+        />{" "}
+        {/* Protected as Public */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

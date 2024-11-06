@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import Layout from '../components/Layout';
@@ -11,7 +11,18 @@ const NewExamPage = () => {
   const [examDescription, setExamDescription] = useState('');
   const [questions, setQuestions] = useState([]);
   const [csvFile, setCsvFile] = useState(null);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [creatorId, setCreatorId] = useState(null); // State for storing creator ID
   const navigate = useNavigate();
+
+  // This function gets the current user's ID, assuming it's stored in localStorage.
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user')); // Adjust based on your app's logic
+    if (user) {
+      setCreatorId(user.id); // Set the creatorId state with the logged-in user's ID
+    }
+  }, []);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -22,64 +33,73 @@ const NewExamPage = () => {
   };
 
   const parseCsv = (file) => {
-  Papa.parse(file, {
-    header: false, // We don't have headers in our CSV
-    skipEmptyLines: true, // Skip empty lines
-    complete: (results) => {
-      const parsedQuestions = [];
+    Papa.parse(file, {
+      header: false, // We don't have headers in our CSV
+      skipEmptyLines: true, // Skip empty lines
+      complete: (results) => {
+        const parsedQuestions = [];
 
-      results.data.forEach((line) => {
-        if (line.length > 0) {
-          const question = line[0].trim();
-          const correctAnswer = line[1].trim();
-          
-          if (line.length === 5) { // Multiple choice question with 4 options
-            const options = [
-              { id: 'a', text: line[1].trim() }, // Correct answer
-              { id: 'b', text: line[2].trim() },
-              { id: 'c', text: line[3].trim() },
-              { id: 'd', text: line[4].trim() },
-            ];
-            parsedQuestions.push({
-              id: `q${parsedQuestions.length + 1}`,
-              type: 'multiple-choice',
-              question,
-              options,
-              correctAnswer
-            });
-          } else if (line.length === 2) { // Open-ended question
-            parsedQuestions.push({
-              id: `q${parsedQuestions.length + 1}`,
-              type: 'open-ended',
-              question,
-              correctAnswer
-            });
+        results.data.forEach((line) => {
+          if (line.length > 0) {
+            const question = line[0].trim();
+            const correctAnswer = line[1].trim();
+            
+            if (line.length === 5) { // Multiple choice question with 4 options
+              const options = [
+                { id: 'a', text: line[1].trim() }, // Correct answer
+                { id: 'b', text: line[2].trim() },
+                { id: 'c', text: line[3].trim() },
+                { id: 'd', text: line[4].trim() },
+              ];
+              parsedQuestions.push({
+                id: `q${parsedQuestions.length + 1}`,
+                type: 'multiple-choice',
+                question,
+                options,
+                correctAnswer
+              });
+            } else if (line.length === 2) { // Open-ended question
+              parsedQuestions.push({
+                id: `q${parsedQuestions.length + 1}`,
+                type: 'open-ended',
+                question,
+                correctAnswer
+              });
+            }
           }
-        }
-      });
+        });
 
-      setQuestions(parsedQuestions);
-    },
-    error: (error) => {
-      console.error("Error parsing CSV:", error);
-    },
-  });
-};
+        setQuestions(parsedQuestions);
+      },
+      error: (error) => {
+        console.error("Error parsing CSV:", error);
+      },
+    });
+  };
 
-
-  
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!creatorId) {
+      console.error("User is not logged in.");
+      return;
+    }
+
+    if (!startDate || !endDate) {
+      console.error("Please set both start date and deadline.");
+      return;
+    }
 
     // Construct the exam object
     const newExam = {
       id: `exam${Date.now()}`, // Unique ID for the exam
       title: examTitle,
       description: examDescription,
-      startDate: new Date().toISOString(), // Current time as start date (for demonstration)
-      endDate: new Date(new Date().getTime() + 3600000).toISOString(), // One hour duration
+      startDate: new Date(startDate).toISOString(), // Use the user-selected start date
+      endDate: new Date(endDate).toISOString(), // Use the user-selected end date
       questions,
-      results: []
+      results: [],
+      creatorId, // Include the creatorId here
     };
 
     try {
@@ -93,7 +113,6 @@ const NewExamPage = () => {
       console.error("Error creating exam:", error);
     }
   };
-
 
   return (
     <Layout>
@@ -122,6 +141,33 @@ const NewExamPage = () => {
               className="rounded border p-2 px-8"
               required
             />
+
+            {/* Date and time input for the start date */}
+            <div className="flex flex-col">
+              <label htmlFor="startDate" className="mb-2 font-semibold">Start Date</label>
+              <input
+                type="datetime-local"
+                id="startDate"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                className="rounded border p-2"
+                required
+              />
+            </div>
+
+            {/* Date and time input for the end date (deadline) */}
+            <div className="flex flex-col">
+              <label htmlFor="endDate" className="mb-2 font-semibold">Deadline</label>
+              <input
+                type="datetime-local"
+                id="endDate"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                className="rounded border p-2"
+                required
+              />
+            </div>
+
             <Button text="Create Exam" onClick={handleSubmit} />
           </form>
 
