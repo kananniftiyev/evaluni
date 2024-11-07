@@ -5,13 +5,13 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import NotFound from "./pages/NotFound";
 import IndexPage from "./pages/IndexPage";
-import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import CreateExamPage from "./pages/CreateExam";
 import ExamPage from "./pages/ExamPage";
-import PublicRoute from "./PublicRoute";
 import ExamResultPage from "./pages/ExamResultPage";
 import MyExamsPage from "./pages/MyExamsPage";
+import PublicRoute from "./components/PublicRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
           path="/dashboard/my-exams"
           element={<ProtectedRoute element={<MyExamsPage />} />}
         />
-        <Route path="/" element={<IndexPage />} />
+        <Route path="/" element={<PublicRoute element={<IndexPage />} />} />
         <Route
           path="login"
           element={<PublicRoute element={<LoginPage />} />}

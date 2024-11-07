@@ -438,6 +438,119 @@
       ],
       "results": [],
       "creatorId": "2d2a"
+    },
+    {
+      "id": "exam1730996658651",
+      "title": "asd",
+      "description": "asd",
+      "startDate": "2024-11-07T16:00:00.000Z",
+      "endDate": "2024-11-07T17:00:00.000Z",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "multiple-choice",
+          "question": "What is the largest ocean on Earth?",
+          "options": [
+            {
+              "id": "b",
+              "text": "Atlantic"
+            },
+            {
+              "id": "a",
+              "text": "Pacific"
+            },
+            {
+              "id": "c",
+              "text": "Indian"
+            },
+            {
+              "id": "d",
+              "text": "Arctic"
+            }
+          ],
+          "correctAnswer": "a"
+        },
+        {
+          "id": "q2",
+          "type": "multiple-choice",
+          "question": "Which is the smallest continent?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Australia"
+            },
+            {
+              "id": "b",
+              "text": "Europe"
+            },
+            {
+              "id": "d",
+              "text": "Africa"
+            },
+            {
+              "id": "c",
+              "text": "Asia"
+            }
+          ],
+          "correctAnswer": "a"
+        },
+        {
+          "id": "q3",
+          "type": "multiple-choice",
+          "question": "What is the chemical symbol for gold?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Au"
+            },
+            {
+              "id": "c",
+              "text": "Fe"
+            },
+            {
+              "id": "d",
+              "text": "Hg"
+            },
+            {
+              "id": "b",
+              "text": "Ag"
+            }
+          ],
+          "correctAnswer": "a"
+        },
+        {
+          "id": "q4",
+          "type": "multiple-choice",
+          "question": "Who wrote 'Romeo and Juliet'?",
+          "options": [
+            {
+              "id": "d",
+              "text": "Chaucer"
+            },
+            {
+              "id": "b",
+              "text": "Moliere"
+            },
+            {
+              "id": "a",
+              "text": "Shakespeare"
+            },
+            {
+              "id": "c",
+              "text": "Dante"
+            }
+          ],
+          "correctAnswer": "a"
+        },
+        {
+          "id": "q5",
+          "type": "open-ended",
+          "question": "Describe your favorite book and why you like it.",
+          "correctAnswer": "Open-ended answer."
+        }
+      ],
+      "results": [],
+      "creatorId": "2d2a"
     }
   ],
   "results": [

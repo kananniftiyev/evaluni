@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Button from '../components/Button';
-import Layout from '../components/Layout';
-import Field from '../components/Field';
-import Papa from 'papaparse'; // Importing the papaparse library
-import axios from 'axios'; // Import Axios
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
+import Layout from "../components/Layout";
+import Field from "../components/Field";
+import Papa from "papaparse"; // Importing the papaparse library
+import axios from "axios"; // Import Axios
 
 const NewExamPage = () => {
-  const [examTitle, setExamTitle] = useState('');
-  const [examDescription, setExamDescription] = useState('');
+  const [examTitle, setExamTitle] = useState("");
+  const [examDescription, setExamDescription] = useState("");
   const [questions, setQuestions] = useState([]);
   const [csvFile, setCsvFile] = useState(null);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [creatorId, setCreatorId] = useState(null); // State for storing creator ID
   const navigate = useNavigate();
 
   // This function gets the current user's ID, assuming it's stored in localStorage.
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user')); // Adjust based on your app's logic
+    const user = JSON.parse(localStorage.getItem("user")); // Adjust based on your app's logic
     if (user) {
       setCreatorId(user.id); // Set the creatorId state with the logged-in user's ID
     }
@@ -32,9 +32,17 @@ const NewExamPage = () => {
     }
   };
 
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   const parseCsv = (file) => {
     Papa.parse(file, {
-      header: false, // We don't have headers in our CSV
+      header: false, // No headers
       skipEmptyLines: true, // Skip empty lines
       complete: (results) => {
         const parsedQuestions = [];
@@ -42,28 +50,39 @@ const NewExamPage = () => {
         results.data.forEach((line) => {
           if (line.length > 0) {
             const question = line[0].trim();
-            const correctAnswer = line[1].trim();
-            
-            if (line.length === 5) { // Multiple choice question with 4 options
+
+            if (line.length === 5) {
+              // Multiple choice question with 4 options
+              const correctOptionText = line[1].trim();
               const options = [
-                { id: 'a', text: line[1].trim() }, // Correct answer
-                { id: 'b', text: line[2].trim() },
-                { id: 'c', text: line[3].trim() },
-                { id: 'd', text: line[4].trim() },
+                { id: "a", text: correctOptionText }, // Initially marked correct
+                { id: "b", text: line[2].trim() },
+                { id: "c", text: line[3].trim() },
+                { id: "d", text: line[4].trim() },
               ];
+
+              // Shuffle options
+              const shuffledOptions = shuffleArray([...options]);
+
+              // Find the new ID of the correct answer
+              const correctOption = shuffledOptions.find(
+                (option) => option.text === correctOptionText
+              );
+
               parsedQuestions.push({
                 id: `q${parsedQuestions.length + 1}`,
-                type: 'multiple-choice',
+                type: "multiple-choice",
                 question,
-                options,
-                correctAnswer
+                options: shuffledOptions,
+                correctAnswer: correctOption.id, // Store new shuffled ID
               });
-            } else if (line.length === 2) { // Open-ended question
+            } else if (line.length === 2) {
+              // Open-ended question
               parsedQuestions.push({
                 id: `q${parsedQuestions.length + 1}`,
-                type: 'open-ended',
+                type: "open-ended",
                 question,
-                correctAnswer
+                correctAnswer: line[1].trim(),
               });
             }
           }
@@ -104,11 +123,11 @@ const NewExamPage = () => {
 
     try {
       // Send the new exam data to the server
-      await axios.post('http://localhost:3000/exams', newExam); // Adjust the URL if necessary
-      console.log('New Exam Created:', newExam);
-      
+      await axios.post("http://localhost:3000/exams", newExam); // Adjust the URL if necessary
+      console.log("New Exam Created:", newExam);
+
       // After saving, navigate to the dashboard or another page
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error creating exam:", error);
     }
@@ -144,7 +163,9 @@ const NewExamPage = () => {
 
             {/* Date and time input for the start date */}
             <div className="flex flex-col">
-              <label htmlFor="startDate" className="mb-2 font-semibold">Start Date</label>
+              <label htmlFor="startDate" className="mb-2 font-semibold">
+                Start Date
+              </label>
               <input
                 type="datetime-local"
                 id="startDate"
@@ -157,7 +178,9 @@ const NewExamPage = () => {
 
             {/* Date and time input for the end date (deadline) */}
             <div className="flex flex-col">
-              <label htmlFor="endDate" className="mb-2 font-semibold">Deadline</label>
+              <label htmlFor="endDate" className="mb-2 font-semibold">
+                Deadline
+              </label>
               <input
                 type="datetime-local"
                 id="endDate"
@@ -179,9 +202,9 @@ const NewExamPage = () => {
                 {questions.map((question) => (
                   <li key={question.id} className="border p-2 mb-2">
                     <strong>{question.question}</strong>
-                    {question.type === 'multiple-choice' && (
+                    {question.type === "multiple-choice" && (
                       <ul className="list-disc ml-4">
-                        {question.options.map(option => (
+                        {question.options.map((option) => (
                           <li key={option.id}>{option.text}</li>
                         ))}
                       </ul>
