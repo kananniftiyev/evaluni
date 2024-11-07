@@ -76,6 +76,24 @@ const MyExamsPage = () => {
     }
   };
 
+  // Handle delete exam
+  const handleDeleteExam = async (examId) => {
+    try {
+      if (window.confirm("Are you sure you want to delete this exam?")) {
+        await fetch(`http://localhost:3000/exams/${examId}`, {
+          method: "DELETE",
+        });
+
+        // Update the list of created exams
+        setCreatedExams((prevExams) =>
+          prevExams.filter((exam) => exam.id !== examId)
+        );
+      }
+    } catch (error) {
+      console.error("Error deleting the exam:", error);
+    }
+  };
+
   // Close the modal
   const closeModal = () => {
     setIsModalOpen(false);
@@ -92,10 +110,17 @@ const MyExamsPage = () => {
             <li key={exam.id} className="bg-white p-4 rounded shadow">
               <h2 className="text-lg font-semibold">{exam.title}</h2>
               <p>{exam.description}</p>
-              <Button
-                text="View Details"
-                onClick={() => viewExamDetails(exam.id)}
-              />
+              <div className="flex gap-2">
+                <Button
+                  text="View Details"
+                  onClick={() => viewExamDetails(exam.id)}
+                />
+                <Button
+                  text="Delete Exam"
+                  onClick={() => handleDeleteExam(exam.id)}
+                  className="bg-red-500 text-white"
+                />
+              </div>
             </li>
           ))}
         </ul>

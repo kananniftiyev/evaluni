@@ -35,7 +35,7 @@ const Dashboard = () => {
 
         // Filter results for the logged-in user
         const userResults = resultsData.filter(
-          (result) => result.userId === user.id
+          (result) => result.userId === user.id && result.examId
         );
 
         // Map user results to their corresponding exams
