@@ -1,5 +1,3 @@
-
-
 .custom-container {
   margin-left: 36px;
   margin-right: 36px;
@@ -18,12 +16,12 @@
   font-weight: 500 !important;
 }
 
-.navbar{
+.navbar {
   background-color: #111111 !important;
 }
 
-.dashboard{}
-
+.dashboard {
+}
 
 /* App.css */
 .fade-enter {
@@ -46,4 +44,101 @@
   opacity: 0;
   transform: translateY(-20px);
   transition: opacity 300ms, transform 300ms;
+}
+
+/* Remove default radio button appearance */
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid #333; /* Border color */
+  border-radius: 4px; /* Make the corners slightly rounded */
+  width: 20px; /* Set the width of the rectangle */
+  height: 20px; /* Set the height of the rectangle */
+  position: relative;
+  cursor: pointer;
+  background-color: white;
+  margin-right: 10px;
+}
+
+/* Style when the radio is selected */
+input[type="radio"]:checked {
+  background-color: #4caf50; /* Green background for selected state */
+  border-color: #4caf50; /* Green border for selected state */
+}
+
+/* Add a checkmark when selected */
+input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  background-color: white; /* White checkmark */
+  border-radius: 50%; /* Circle for the checkmark */
+}
+
+/* Hover effect */
+input[type="radio"]:hover {
+  background-color: #f0f0f0; /* Light grey background on hover */
+}
+
+/* Style for text area */
+textarea {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid #333; /* Border color */
+  border-radius: 4px; /* Slightly rounded corners */
+  width: 100%; /* Make the textarea take full width */
+  padding: 10px; /* Padding inside the textarea */
+  font-size: 14px; /* Font size */
+  resize: vertical; /* Allow vertical resizing */
+  outline: none; /* Remove default outline */
+  transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+/* Focus state (when textarea is focused) */
+textarea:focus {
+  border-color: #4caf50; /* Change border color to green on focus */
+  background-color: #f9f9f9; /* Light grey background on focus */
+}
+
+/* Hover effect */
+textarea:hover {
+  border-color: #777; /* Darker border when hovering */
+}
+
+/* Optional: Style for text when typing */
+textarea:focus::placeholder {
+  color: #aaa; /* Placeholder text color on focus */
+}
+
+textarea {
+  resize: none; /* Disable resizing */
+}
+
+.revoult-white {
+  background-color: #f7f7f7;
+}
+
+.revoult-black {
+  background-color: #21262e;
+}
+
+.revoult-blue {
+  background-color: #0666eb;
+}
+
+.revoult-white-text {
+  color: #f7f7f7;
+}
+
+.revoult-black-text {
+  color: #21262e;
+}
+
+.revoult-blue-text {
+  color: #0666eb;
 }

@@ -101,350 +101,11 @@
       "results": []
     },
     {
-      "id": "exam1730995451007",
-      "title": "123",
-      "description": "123",
-      "startDate": "2024-11-07T16:00:00.000Z",
-      "endDate": "2024-11-07T17:00:00.000Z",
-      "questions": [
-        {
-          "id": "q1",
-          "type": "multiple-choice",
-          "question": "What is the largest ocean on Earth?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Pacific"
-            },
-            {
-              "id": "b",
-              "text": "Atlantic"
-            },
-            {
-              "id": "c",
-              "text": "Indian"
-            },
-            {
-              "id": "d",
-              "text": "Arctic"
-            }
-          ],
-          "correctAnswer": "Pacific"
-        },
-        {
-          "id": "q2",
-          "type": "multiple-choice",
-          "question": "Which is the smallest continent?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Australia"
-            },
-            {
-              "id": "b",
-              "text": "Europe"
-            },
-            {
-              "id": "c",
-              "text": "Asia"
-            },
-            {
-              "id": "d",
-              "text": "Africa"
-            }
-          ],
-          "correctAnswer": "Australia"
-        },
-        {
-          "id": "q3",
-          "type": "multiple-choice",
-          "question": "What is the chemical symbol for gold?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Au"
-            },
-            {
-              "id": "b",
-              "text": "Ag"
-            },
-            {
-              "id": "c",
-              "text": "Fe"
-            },
-            {
-              "id": "d",
-              "text": "Hg"
-            }
-          ],
-          "correctAnswer": "Au"
-        },
-        {
-          "id": "q4",
-          "type": "multiple-choice",
-          "question": "Who wrote 'Romeo and Juliet'?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Shakespeare"
-            },
-            {
-              "id": "b",
-              "text": "Moliere"
-            },
-            {
-              "id": "c",
-              "text": "Dante"
-            },
-            {
-              "id": "d",
-              "text": "Chaucer"
-            }
-          ],
-          "correctAnswer": "Shakespeare"
-        },
-        {
-          "id": "q5",
-          "type": "open-ended",
-          "question": "Describe your favorite book and why you like it.",
-          "correctAnswer": "Open-ended answer."
-        }
-      ],
-      "results": [],
-      "creatorId": "2d2a"
-    },
-    {
-      "id": "exam1730995756965",
-      "title": "asdas",
-      "description": "123",
-      "startDate": "2024-11-07T16:00:00.000Z",
-      "endDate": "2024-11-07T17:00:00.000Z",
-      "questions": [
-        {
-          "id": "q1",
-          "type": "multiple-choice",
-          "question": "What is the largest ocean on Earth?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Pacific"
-            },
-            {
-              "id": "b",
-              "text": "Atlantic"
-            },
-            {
-              "id": "c",
-              "text": "Indian"
-            },
-            {
-              "id": "d",
-              "text": "Arctic"
-            }
-          ],
-          "correctAnswer": "Pacific"
-        },
-        {
-          "id": "q2",
-          "type": "multiple-choice",
-          "question": "Which is the smallest continent?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Australia"
-            },
-            {
-              "id": "b",
-              "text": "Europe"
-            },
-            {
-              "id": "c",
-              "text": "Asia"
-            },
-            {
-              "id": "d",
-              "text": "Africa"
-            }
-          ],
-          "correctAnswer": "Australia"
-        },
-        {
-          "id": "q3",
-          "type": "multiple-choice",
-          "question": "What is the chemical symbol for gold?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Au"
-            },
-            {
-              "id": "b",
-              "text": "Ag"
-            },
-            {
-              "id": "c",
-              "text": "Fe"
-            },
-            {
-              "id": "d",
-              "text": "Hg"
-            }
-          ],
-          "correctAnswer": "Au"
-        },
-        {
-          "id": "q4",
-          "type": "multiple-choice",
-          "question": "Who wrote 'Romeo and Juliet'?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Shakespeare"
-            },
-            {
-              "id": "b",
-              "text": "Moliere"
-            },
-            {
-              "id": "c",
-              "text": "Dante"
-            },
-            {
-              "id": "d",
-              "text": "Chaucer"
-            }
-          ],
-          "correctAnswer": "Shakespeare"
-        },
-        {
-          "id": "q5",
-          "type": "open-ended",
-          "question": "Describe your favorite book and why you like it.",
-          "correctAnswer": "Open-ended answer."
-        }
-      ],
-      "results": [],
-      "creatorId": "2d2a"
-    },
-    {
-      "id": "exam1730995892982",
-      "title": "zaz",
-      "description": "aza",
-      "startDate": "2024-11-07T16:00:00.000Z",
-      "endDate": "2024-11-07T17:00:00.000Z",
-      "questions": [
-        {
-          "id": "q1",
-          "type": "multiple-choice",
-          "question": "What is the largest ocean on Earth?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Pacific"
-            },
-            {
-              "id": "b",
-              "text": "Atlantic"
-            },
-            {
-              "id": "c",
-              "text": "Indian"
-            },
-            {
-              "id": "d",
-              "text": "Arctic"
-            }
-          ],
-          "correctAnswer": "Pacific"
-        },
-        {
-          "id": "q2",
-          "type": "multiple-choice",
-          "question": "Which is the smallest continent?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Australia"
-            },
-            {
-              "id": "b",
-              "text": "Europe"
-            },
-            {
-              "id": "c",
-              "text": "Asia"
-            },
-            {
-              "id": "d",
-              "text": "Africa"
-            }
-          ],
-          "correctAnswer": "Australia"
-        },
-        {
-          "id": "q3",
-          "type": "multiple-choice",
-          "question": "What is the chemical symbol for gold?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Au"
-            },
-            {
-              "id": "b",
-              "text": "Ag"
-            },
-            {
-              "id": "c",
-              "text": "Fe"
-            },
-            {
-              "id": "d",
-              "text": "Hg"
-            }
-          ],
-          "correctAnswer": "Au"
-        },
-        {
-          "id": "q4",
-          "type": "multiple-choice",
-          "question": "Who wrote 'Romeo and Juliet'?",
-          "options": [
-            {
-              "id": "a",
-              "text": "Shakespeare"
-            },
-            {
-              "id": "b",
-              "text": "Moliere"
-            },
-            {
-              "id": "c",
-              "text": "Dante"
-            },
-            {
-              "id": "d",
-              "text": "Chaucer"
-            }
-          ],
-          "correctAnswer": "Shakespeare"
-        },
-        {
-          "id": "q5",
-          "type": "open-ended",
-          "question": "Describe your favorite book and why you like it.",
-          "correctAnswer": "Open-ended answer."
-        }
-      ],
-      "results": [],
-      "creatorId": "2d2a"
-    },
-    {
-      "id": "exam1730996658651",
+      "id": "exam1731261092228",
       "title": "asd",
-      "description": "asd",
-      "startDate": "2024-11-07T16:00:00.000Z",
-      "endDate": "2024-11-07T17:00:00.000Z",
+      "description": "",
+      "startDate": "2024-11-10T10:11:00.000Z",
+      "endDate": "2024-11-10T10:26:00.000Z",
       "questions": [
         {
           "id": "q1",
@@ -456,19 +117,19 @@
               "text": "Atlantic"
             },
             {
-              "id": "a",
-              "text": "Pacific"
+              "id": "d",
+              "text": "Arctic"
             },
             {
               "id": "c",
               "text": "Indian"
             },
             {
-              "id": "d",
-              "text": "Arctic"
+              "id": "a",
+              "text": "Pacific"
             }
           ],
-          "correctAnswer": "a"
+          "correctAnswer": "Pacific"
         },
         {
           "id": "q2",
@@ -480,19 +141,19 @@
               "text": "Australia"
             },
             {
+              "id": "c",
+              "text": "Asia"
+            },
+            {
               "id": "b",
               "text": "Europe"
             },
             {
               "id": "d",
               "text": "Africa"
-            },
-            {
-              "id": "c",
-              "text": "Asia"
             }
           ],
-          "correctAnswer": "a"
+          "correctAnswer": "Australia"
         },
         {
           "id": "q3",
@@ -500,23 +161,23 @@
           "question": "What is the chemical symbol for gold?",
           "options": [
             {
-              "id": "a",
-              "text": "Au"
+              "id": "d",
+              "text": "Hg"
             },
             {
               "id": "c",
               "text": "Fe"
             },
             {
-              "id": "d",
-              "text": "Hg"
-            },
-            {
               "id": "b",
               "text": "Ag"
+            },
+            {
+              "id": "a",
+              "text": "Au"
             }
           ],
-          "correctAnswer": "a"
+          "correctAnswer": "Au"
         },
         {
           "id": "q4",
@@ -524,23 +185,23 @@
           "question": "Who wrote 'Romeo and Juliet'?",
           "options": [
             {
-              "id": "d",
-              "text": "Chaucer"
-            },
-            {
               "id": "b",
               "text": "Moliere"
+            },
+            {
+              "id": "c",
+              "text": "Dante"
             },
             {
               "id": "a",
               "text": "Shakespeare"
             },
             {
-              "id": "c",
-              "text": "Dante"
+              "id": "d",
+              "text": "Chaucer"
             }
           ],
-          "correctAnswer": "a"
+          "correctAnswer": "Shakespeare"
         },
         {
           "id": "q5",
@@ -570,118 +231,6 @@
       "score": 1,
       "submittedAt": "2024-11-10T12:30:00Z",
       "id": "f53d"
-    },
-    {
-      "id": "4f0d",
-      "userId": "2d2a",
-      "examId": null,
-      "answers": [
-        {
-          "questionId": "q4",
-          "selectedOption": "d"
-        },
-        {
-          "questionId": "q3",
-          "selectedOption": "b"
-        },
-        {
-          "questionId": "q2",
-          "selectedOption": "a"
-        },
-        {
-          "questionId": "q1",
-          "selectedOption": "d"
-        },
-        {
-          "questionId": "q5",
-          "selectedOption": "s"
-        }
-      ],
-      "score": 0,
-      "submittedAt": "2024-11-05T18:15:50.777Z"
-    },
-    {
-      "id": "f42b",
-      "userId": "2d2a",
-      "examId": null,
-      "answers": {
-        "q1": "d",
-        "q2": "b",
-        "q4": "c",
-        "q3": "d",
-        "q5": "asd"
-      },
-      "score": 0,
-      "submittedAt": "2024-11-07T15:52:30.677Z"
-    },
-    {
-      "id": "7ec1",
-      "userId": "2d2a",
-      "examId": null,
-      "answers": {
-        "q1": "b",
-        "q2": "d",
-        "q4": "b",
-        "q3": "c",
-        "q5": "asdasd"
-      },
-      "score": 0,
-      "submittedAt": "2024-11-07T15:59:16.602Z"
-    },
-    {
-      "id": "374b",
-      "userId": "2d2a",
-      "examId": null,
-      "answers": {
-        "q1": "d",
-        "q2": "d",
-        "q4": "a",
-        "q3": "d"
-      },
-      "score": 0,
-      "submittedAt": "2024-11-07T16:02:36.296Z"
-    },
-    {
-      "id": "cd43",
-      "userId": "2d2a",
-      "examId": "exam1730995451007",
-      "answers": {
-        "q1": "b",
-        "q2": "a",
-        "q3": "d",
-        "q4": "a",
-        "q5": "asd"
-      },
-      "score": 0,
-      "submittedAt": "2024-11-07T16:04:26.040Z"
-    },
-    {
-      "id": "f806",
-      "userId": "2d2a",
-      "examId": "exam1730995756965",
-      "answers": {
-        "q1": "c",
-        "q2": "a",
-        "q3": "d",
-        "q4": "b",
-        "q5": "asd"
-      },
-      "score": 0,
-      "submittedAt": "2024-11-07T16:09:31.495Z"
-    },
-    {
-      "id": "97d4",
-      "userId": "2d2a",
-      "examId": "exam1730995892982",
-      "answers": {
-        "q1": "Pacific",
-        "q2": "Australia",
-        "q3": "Au",
-        "q4": "Shakespeare",
-        "q5": "asdas"
-      },
-      "score": 4,
-      "submittedAt": "2024-11-07T16:15:49.224Z"
     }
   ]
 }

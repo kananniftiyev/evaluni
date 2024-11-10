@@ -6,7 +6,7 @@ function Button(props) {
       className={`text-center rounded font-semibold px-8 py-4 ${
         props.disabled
           ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-          : "bg-blue-600 text-white hover:bg-blue-700"
+          : "revoult-blue text-white hover:bg-blue-700"
       }`}
     >
       {props.text}

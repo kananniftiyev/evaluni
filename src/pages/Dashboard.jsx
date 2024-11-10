@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Button from "../components/Button";
+import Modal from "../components/Modal";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [exams, setExams] = useState([]);
   const [userExams, setUserExams] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const location = useLocation();
+  const [showModal, setShowModal] = useState(false);
+  const [examId, setExamId] = useState(null);
   const navigate = useNavigate();
 
   // Fetch and set user only once
@@ -18,6 +22,13 @@ const Dashboard = () => {
       navigate("/login");
     }
   }, [navigate]);
+
+  useEffect(() => {
+    if (location.state?.showModal) {
+      setShowModal(true);
+      setExamId(location.state.examId);
+    }
+  }, [location.state]);
 
   // Fetch exams and results only when `user` is set
   useEffect(() => {
@@ -77,7 +88,7 @@ const Dashboard = () => {
         <div className="container mx-auto flex justify-between items-center">
           <h1
             className="text-2xl font-bold cursor-pointer"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/dashboard")}
           >
             Evaluni Dashboard
           </h1>
@@ -138,10 +149,10 @@ const Dashboard = () => {
           </div>
         </div>
         <div>
-          <h3 className="text-lg font-semibold mb-2">Past Exams</h3>
-          <ul className="space-y-4">
-            {userExams.length > 0 ? (
-              userExams.map((exam) => (
+          <h3 className="text-lg font-semibold mb-4">Past Exams</h3>
+          {userExams.length > 0 ? (
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {userExams.map((exam) => (
                 <li key={exam.id} className="bg-white p-4 rounded shadow">
                   <h4 className="text-md font-semibold">{exam.title}</h4>
                   <p className="text-gray-600">{exam.description}</p>
@@ -157,13 +168,19 @@ const Dashboard = () => {
                     }}
                   />
                 </li>
-              ))
-            ) : (
-              <p>No past exams found.</p>
-            )}
-          </ul>
+              ))}
+            </ul>
+          ) : (
+            <p>No past exams found.</p>
+          )}
         </div>
       </main>
+
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        examId={examId}
+      />
     </div>
   );
 };

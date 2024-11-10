@@ -77,20 +77,57 @@ const MyExamsPage = () => {
   };
 
   // Handle delete exam
+  // Handle delete exam and related results
   const handleDeleteExam = async (examId) => {
     try {
       if (window.confirm("Are you sure you want to delete this exam?")) {
-        await fetch(`http://localhost:3000/exams/${examId}`, {
-          method: "DELETE",
-        });
+        // Step 1: Fetch the results related to the examId
+        const resultsResponse = await fetch(
+          `http://localhost:3000/results?examId=${examId}`
+        );
+        const results = await resultsResponse.json();
 
-        // Update the list of created exams
+        if (resultsResponse.ok && results.length > 0) {
+          // Step 2: Delete related results by their resultId
+          for (const result of results) {
+            const resultId = result.id;
+            const deleteResultResponse = await fetch(
+              `http://localhost:3000/results/${resultId}`,
+              {
+                method: "DELETE",
+              }
+            );
+
+            if (!deleteResultResponse.ok) {
+              console.error(`Failed to delete result with ID: ${resultId}`);
+            } else {
+              console.log(`Successfully deleted result with ID: ${resultId}`);
+            }
+          }
+        }
+
+        // Step 3: Now delete the exam
+        const examResponse = await fetch(
+          `http://localhost:3000/exams/${examId}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!examResponse.ok) {
+          console.error("Failed to delete exam");
+          return;
+        }
+
+        // Step 4: Update the list of created exams
         setCreatedExams((prevExams) =>
           prevExams.filter((exam) => exam.id !== examId)
         );
+
+        console.log(`Successfully deleted exam and its results`);
       }
     } catch (error) {
-      console.error("Error deleting the exam:", error);
+      console.error("Error deleting the exam and its related results:", error);
     }
   };
 
@@ -103,22 +140,30 @@ const MyExamsPage = () => {
 
   return (
     <Layout>
-      <div className="created-exams-page min-h-screen bg-gray-100">
-        <h1 className="text-2xl font-semibold">My Created Exams</h1>
+      <div className="created-exams-page p-4 min-h-screen w-full max-w-4xl mx-auto">
+        <h1 className="text-3xl font-semibold mb-4 text-center revoult-black-text">
+          My Created Exams
+        </h1>
         <ul className="space-y-4 mt-4">
           {createdExams.map((exam) => (
-            <li key={exam.id} className="bg-white p-4 rounded shadow">
-              <h2 className="text-lg font-semibold">{exam.title}</h2>
-              <p>{exam.description}</p>
-              <div className="flex gap-2">
+            <li
+              key={exam.id}
+              className="revoult-white p-4 rounded-lg shadow-sm"
+            >
+              <h2 className="text-lg font-semibold revoult-black-text">
+                {exam.title}
+              </h2>
+              <p className="revoult-black-text">{exam.description}</p>
+              <div className="flex gap-2 mt-4">
                 <Button
                   text="View Details"
                   onClick={() => viewExamDetails(exam.id)}
+                  className="revoult-black-button"
                 />
                 <Button
                   text="Delete Exam"
                   onClick={() => handleDeleteExam(exam.id)}
-                  className="bg-red-500 text-white"
+                  className="bg-red-500 text-white revoult-black-button"
                 />
               </div>
             </li>
@@ -129,13 +174,13 @@ const MyExamsPage = () => {
         {isModalOpen && selectedExam && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white p-6 rounded-lg w-96">
-              <h2 className="text-lg font-semibold mb-4">
+              <h2 className="text-lg font-semibold mb-4 revoult-black-text">
                 Participants and Leaderboard
               </h2>
               <ul className="space-y-2">
                 {participants.map((participant, index) => (
                   <li key={participant.id} className="bg-gray-50 p-2 rounded">
-                    <p>
+                    <p className="revoult-black-text">
                       {index + 1}. {participant.userName}{" "}
                       {participant.userSurname} - {participant.userEmail} -
                       Score: {participant.score}
@@ -143,7 +188,11 @@ const MyExamsPage = () => {
                   </li>
                 ))}
               </ul>
-              <Button text="Close" onClick={closeModal} className="mt-4" />
+              <Button
+                text="Close"
+                onClick={closeModal}
+                className="mt-4 revoult-black-button"
+              />
             </div>
           </div>
         )}

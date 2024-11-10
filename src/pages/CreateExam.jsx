@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import Field from "../components/Field";
 import Papa from "papaparse"; // Importing the papaparse library
 import axios from "axios"; // Import Axios
+import Modal from "../components/Modal";
 
 const NewExamPage = () => {
   const [examTitle, setExamTitle] = useState("");
@@ -12,15 +13,18 @@ const NewExamPage = () => {
   const [questions, setQuestions] = useState([]);
   const [csvFile, setCsvFile] = useState(null);
   const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [duration, setDuration] = useState(15); // Default to 15 minutes
   const [creatorId, setCreatorId] = useState(null); // State for storing creator ID
+  const [showModal, setShowModal] = useState(false); // New state to control modal visibility
+  const [examId, setExamId] = useState(null); // New state for exam ID
+  const [examTitleError, setExamTitleError] = useState(""); // Error state for exam title
   const navigate = useNavigate();
 
   // This function gets the current user's ID, assuming it's stored in localStorage.
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user")); // Adjust based on your app's logic
+    const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
-      setCreatorId(user.id); // Set the creatorId state with the logged-in user's ID
+      setCreatorId(user.id);
     }
   }, []);
 
@@ -42,8 +46,8 @@ const NewExamPage = () => {
 
   const parseCsv = (file) => {
     Papa.parse(file, {
-      header: false, // No headers
-      skipEmptyLines: true, // Skip empty lines
+      header: false,
+      skipEmptyLines: true,
       complete: (results) => {
         const parsedQuestions = [];
 
@@ -52,32 +56,24 @@ const NewExamPage = () => {
             const question = line[0].trim();
 
             if (line.length === 5) {
-              // Multiple choice question with 4 options
               const correctOptionText = line[1].trim();
               const options = [
-                { id: "a", text: correctOptionText }, // Initially marked correct
+                { id: "a", text: correctOptionText },
                 { id: "b", text: line[2].trim() },
                 { id: "c", text: line[3].trim() },
                 { id: "d", text: line[4].trim() },
               ];
 
-              // Shuffle options
               const shuffledOptions = shuffleArray([...options]);
-
-              // Find the new ID of the correct answer
-              const correctOption = shuffledOptions.find(
-                (option) => option.text === correctOptionText
-              );
 
               parsedQuestions.push({
                 id: `q${parsedQuestions.length + 1}`,
                 type: "multiple-choice",
                 question,
                 options: shuffledOptions,
-                correctAnswer: correctOption.id, // Store new shuffled ID
+                correctAnswer: correctOptionText,
               });
             } else if (line.length === 2) {
-              // Open-ended question
               parsedQuestions.push({
                 id: `q${parsedQuestions.length + 1}`,
                 type: "open-ended",
@@ -99,35 +95,45 @@ const NewExamPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!examTitle) {
+      setExamTitleError("Exam title is required.");
+      return;
+    } else {
+      setExamTitleError("");
+    }
+
+    if (!startDate || !duration) {
+      console.error("Please set both start date and duration.");
+      return;
+    }
+
     if (!creatorId) {
       console.error("User is not logged in.");
       return;
     }
 
-    if (!startDate || !endDate) {
-      console.error("Please set both start date and deadline.");
-      return;
-    }
+    const endDate = new Date(startDate);
+    endDate.setMinutes(endDate.getMinutes() + duration); // Set the end date based on the duration
 
-    // Construct the exam object
     const newExam = {
-      id: `exam${Date.now()}`, // Unique ID for the exam
+      id: `exam${Date.now()}`,
       title: examTitle,
       description: examDescription,
-      startDate: new Date(startDate).toISOString(), // Use the user-selected start date
-      endDate: new Date(endDate).toISOString(), // Use the user-selected end date
+      startDate: new Date(startDate).toISOString(),
+      endDate: endDate.toISOString(),
       questions,
       results: [],
-      creatorId, // Include the creatorId here
+      creatorId,
     };
 
     try {
-      // Send the new exam data to the server
-      await axios.post("http://localhost:3000/exams", newExam); // Adjust the URL if necessary
-      console.log("New Exam Created:", newExam);
+      await axios.post("http://localhost:3000/exams", newExam);
+      setExamId(newExam.id);
+      setShowModal(true);
 
-      // After saving, navigate to the dashboard or another page
-      navigate("/dashboard");
+      navigate("/dashboard", {
+        state: { showModal: true, examId: newExam.id },
+      });
     } catch (error) {
       console.error("Error creating exam:", error);
     }
@@ -146,6 +152,11 @@ const NewExamPage = () => {
               name="examTitle"
               required
             />
+            {examTitleError && (
+              <p className="ml-1 text-red-500 text-sm mb-1 font-semibold">
+                {examTitleError}
+              </p>
+            )}
             <Field
               text="Exam Description"
               value={examDescription}
@@ -161,7 +172,6 @@ const NewExamPage = () => {
               required
             />
 
-            {/* Date and time input for the start date */}
             <div className="flex flex-col">
               <label htmlFor="startDate" className="mb-2 font-semibold">
                 Start Date
@@ -176,25 +186,28 @@ const NewExamPage = () => {
               />
             </div>
 
-            {/* Date and time input for the end date (deadline) */}
             <div className="flex flex-col">
-              <label htmlFor="endDate" className="mb-2 font-semibold">
-                Deadline
+              <label htmlFor="duration" className="mb-2 font-semibold">
+                Duration (in minutes)
               </label>
-              <input
-                type="datetime-local"
-                id="endDate"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
+              <select
+                id="duration"
+                value={duration}
+                onChange={(e) => setDuration(Number(e.target.value))}
                 className="rounded border p-2"
                 required
-              />
+              >
+                <option value={15}>15 minutes</option>
+                <option value={30}>30 minutes</option>
+                <option value={45}>45 minutes</option>
+                <option value={60}>1 hour</option>
+                <option value={120}>2 hours</option>
+              </select>
             </div>
 
             <Button text="Create Exam" onClick={handleSubmit} />
           </form>
 
-          {/* Display parsed questions */}
           {questions.length > 0 && (
             <div className="mt-4">
               <h2 className="text-xl font-semibold mb-2">Parsed Questions</h2>
@@ -216,6 +229,12 @@ const NewExamPage = () => {
           )}
         </div>
       </div>
+
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        examId={examId}
+      />
     </Layout>
   );
 };

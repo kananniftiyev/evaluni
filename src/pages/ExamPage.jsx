@@ -63,6 +63,7 @@ const ExamPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (alreadySubmitted || !isExamOpen) return;
+    console.log(id);
 
     // Process the answers and send to server
     const response = await fetch("http://localhost:3000/results", {
@@ -89,11 +90,6 @@ const ExamPage = () => {
     // Loop through each question in the exam
     exam.questions.forEach((question) => {
       const userAnswer = answers[question.id];
-
-      console.log(
-        `User Answer: ${userAnswer}, Correct Answer: ${question.correctAnswer}`
-      );
-
       // Check if the question is multiple choice or open-ended
       if (question.type === "multiple-choice" && userAnswer) {
         if (userAnswer === question.correctAnswer) {
@@ -116,25 +112,39 @@ const ExamPage = () => {
   if (!exam) return <div>Loading...</div>;
 
   return (
-    <div className="exam-page p-4">
-      <h1 className="text-2xl font-semibold mb-4">{exam.title}</h1>
-      <p className="mb-4">{exam.description}</p>
+    <div className="exam-page p-4 min-h-screen w-full max-w-4xl mx-auto">
+      <h1 className="text-3xl font-semibold mb-4 text-center revoult-black-text">
+        {exam.title}
+      </h1>
+      <p className="mb-4 italic revoult-black-text">{exam.description}</p>
+
+      <hr className="my-4 border-t-2 border-[#21262e]" />
 
       {/* Show if the exam is not open for submission */}
       {!isExamOpen && (
-        <p className="text-red-500">
+        <p className="text-red-500 revoult-black-text">
           The exam is not available for submission. It may have already ended or
           hasn't started yet.
         </p>
       )}
 
       {alreadySubmitted ? (
-        <p className="text-red-500">You have already submitted this exam.</p>
+        <p className="text-red-500 revoult-black-text">
+          You have already submitted this exam.
+        </p>
       ) : isExamOpen ? (
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-4xl mx-auto grid gap-2 revoult-black-text"
+        >
           {exam.questions.map((question) => (
-            <div key={question.id} className="mb-4">
-              <p className="font-semibold">{question.question}</p>
+            <div
+              key={question.id}
+              className="mb-4 rounded-lg bg-blue-600 p-5 revoult-white shadow-sm"
+            >
+              <p className="font-semibold revoult-black-text">
+                {question.question}
+              </p>
               {question.type === "multiple-choice" ? (
                 question.options.map((option) => (
                   <label key={option.id} className="block">
