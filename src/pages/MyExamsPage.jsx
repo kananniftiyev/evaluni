@@ -2,6 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Layout from "../components/Layout";
+import { Bar } from "react-chartjs-2"; // Import Bar chart from react-chartjs-2
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+
+// Register the necessary components for Chart.js
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+);
 
 const MyExamsPage = () => {
   const [user, setUser] = useState(null);
@@ -9,6 +29,7 @@ const MyExamsPage = () => {
   const [selectedExam, setSelectedExam] = useState(null);
   const [participants, setParticipants] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [chartData, setChartData] = useState(null);
   const navigate = useNavigate();
 
   // Fetch the current user
@@ -69,6 +90,23 @@ const MyExamsPage = () => {
         (a, b) => b.score - a.score
       );
       setParticipants(sortedParticipants);
+
+      // Prepare data for the chart
+      setChartData({
+        labels: sortedParticipants.map(
+          (participant) => `${participant.userName} ${participant.userSurname}`
+        ),
+        datasets: [
+          {
+            label: "Scores",
+            data: sortedParticipants.map((participant) => participant.score),
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+          },
+        ],
+      });
+
       setSelectedExam(examId);
       setIsModalOpen(true); // Open the modal when exam details are fetched
     } catch (error) {
@@ -77,18 +115,15 @@ const MyExamsPage = () => {
   };
 
   // Handle delete exam
-  // Handle delete exam and related results
   const handleDeleteExam = async (examId) => {
     try {
       if (window.confirm("Are you sure you want to delete this exam?")) {
-        // Step 1: Fetch the results related to the examId
         const resultsResponse = await fetch(
           `http://localhost:3000/results?examId=${examId}`
         );
         const results = await resultsResponse.json();
 
         if (resultsResponse.ok && results.length > 0) {
-          // Step 2: Delete related results by their resultId
           for (const result of results) {
             const resultId = result.id;
             const deleteResultResponse = await fetch(
@@ -100,13 +135,10 @@ const MyExamsPage = () => {
 
             if (!deleteResultResponse.ok) {
               console.error(`Failed to delete result with ID: ${resultId}`);
-            } else {
-              console.log(`Successfully deleted result with ID: ${resultId}`);
             }
           }
         }
 
-        // Step 3: Now delete the exam
         const examResponse = await fetch(
           `http://localhost:3000/exams/${examId}`,
           {
@@ -119,11 +151,9 @@ const MyExamsPage = () => {
           return;
         }
 
-        // Step 4: Update the list of created exams
         setCreatedExams((prevExams) =>
           prevExams.filter((exam) => exam.id !== examId)
         );
-
         console.log(`Successfully deleted exam and its results`);
       }
     } catch (error) {
@@ -136,6 +166,7 @@ const MyExamsPage = () => {
     setIsModalOpen(false);
     setSelectedExam(null);
     setParticipants([]);
+    setChartData(null); // Clear chart data on close
   };
 
   return (
@@ -177,6 +208,12 @@ const MyExamsPage = () => {
               <h2 className="text-lg font-semibold mb-4 revoult-black-text">
                 Participants and Leaderboard
               </h2>
+              {/* Chart.js visualization */}
+              {chartData && (
+                <div className="mb-4">
+                  <Bar data={chartData} />
+                </div>
+              )}
               <ul className="space-y-2">
                 {participants.map((participant, index) => (
                   <li key={participant.id} className="bg-gray-50 p-2 rounded">
