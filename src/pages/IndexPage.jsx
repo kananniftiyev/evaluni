@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../App.css"; // Assuming your general styles are here
 
-const images = ["/uni2.jpg", "/uni3.jpg"];
+const images = ["/uni2.jpg", "/uni3.jpg", "uni.jpg"];
 
 function IndexPage() {
   const [currentImage, setCurrentImage] = useState(0);
@@ -25,7 +25,7 @@ function IndexPage() {
           }`}
           style={{
             backgroundImage: `url(${image})`,
-            filter: index === currentImage ? "blur(6px)" : "blur(0)", // Apply a lower blur for smoother transition
+            filter: index === currentImage ? "blur(6px)" : "blur(0)",
           }}
         ></div>
       ))}

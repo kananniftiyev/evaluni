@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 
 const ExamResultPage = () => {
-  const { id } = useParams(); // Get the exam ID from the URL
+  const { id } = useParams();
   const [user, setUser] = useState(null);
   const [exam, setExam] = useState(null);
   const [result, setResult] = useState(null);
@@ -12,20 +12,18 @@ const ExamResultPage = () => {
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("user"));
     if (!loggedInUser) {
-      navigate("/login"); // Redirect to login if user is not logged in
+      navigate("/login");
       return;
     }
     setUser(loggedInUser);
 
     const fetchExamData = async () => {
       try {
-        // Fetch exam data
         const examResponse = await fetch(`http://localhost:3000/exams/${id}`);
         if (!examResponse.ok) throw new Error("Exam not found");
         const examData = await examResponse.json();
         setExam(examData);
 
-        // Fetch the result for this user and exam
         const resultsResponse = await fetch(`http://localhost:3000/results`);
         const resultsData = await resultsResponse.json();
         const userResult = resultsData.find(
@@ -33,13 +31,13 @@ const ExamResultPage = () => {
         );
 
         if (userResult) {
-          setResult(userResult); // Set the result if found
+          setResult(userResult);
         } else {
-          navigate("/dashboard"); // Redirect to dashboard if no result found
+          navigate("/dashboard");
         }
       } catch (error) {
         console.error(error);
-        navigate("/dashboard"); // Redirect to dashboard if error occurs
+        navigate("/dashboard");
       }
     };
 
