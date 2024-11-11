@@ -88,3 +88,48 @@ Now It is ready you can run app with:
 ```bash
 deno task dev
 ```
+
+# Evaluni: Importing CSV Questions for Exams
+
+Evaluni allows you to create and manage quizzes and exams for university students. One of the features is the ability to import questions from a CSV file. Below is a tutorial on how to prepare your CSV file, import it, and use it in your application.
+
+## How to Format Your CSV File
+
+Your CSV file should contain the questions and their corresponding multiple-choice answers. The correct answer will always be listed first in each row, followed by the incorrect options. You can also include open-ended questions that can be left blank.
+
+### Example CSV File
+
+Here’s an example CSV file containing 10 questions with their respective answers:
+
+```csv
+"What is the capital of Japan?","Tokyo","Osaka","Kyoto","Sapporo"
+"Which element has the chemical symbol O?","Oxygen","Osmium","Ozone","Opium"
+"Who was the first president of the United States?","George Washington","Thomas Jefferson","Abraham Lincoln","John Adams"
+"How many continents are there on Earth?","7","6","5","8"
+"What is the largest planet in our solar system?","Jupiter","Saturn","Earth","Mars"
+"Which animal is known as the king of the jungle?","Lion","Tiger","Elephant","Giraffe"
+"Who painted the Mona Lisa?","Leonardo da Vinci","Vincent van Gogh","Pablo Picasso","Claude Monet"
+"Which country is the largest by land area?","Russia","Canada","United States","China"
+"What is the main ingredient in guacamole?","Avocado","Tomato","Onion","Pepper"
+"Which ocean is the largest?","Pacific Ocean","Atlantic Ocean","Indian Ocean","Arctic Ocean"
+```
+
+### CSV Structure
+
+- Question: The first column contains the question text.
+- Correct Answer: The second column contains the correct answer (always listed first).
+- Incorrect Answers: The remaining columns contain the incorrect answer choices.
+
+### Open-ended Questions
+
+You can also add open-ended questions by leaving the answer options blank. For example:
+
+```csv
+"What is your favorite book and why?","Open-ended answer."
+```
+
+In the case of open-ended questions, the second column can contain instructions like "Open-ended answer.", which will be handled appropriately by the system.
+
+### Example files
+
+You can find examples of csv files in the [csv](csv/) folder.
