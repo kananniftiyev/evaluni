@@ -19,6 +19,7 @@ const NewExamPage = () => {
   const [examId, setExamId] = useState(null); // New state for exam ID
   const [examTitleError, setExamTitleError] = useState(""); // Error state for exam title
   const navigate = useNavigate();
+  const [scorePerCorrectAnswer, setScorePerCorrectAnswer] = useState(1); // Default to 1 point
 
   // This function gets the current user's ID, assuming it's stored in localStorage.
   useEffect(() => {
@@ -124,6 +125,7 @@ const NewExamPage = () => {
       questions,
       results: [],
       creatorId,
+      scorePerCorrectAnswer, // Include custom score
     };
 
     try {
@@ -164,6 +166,14 @@ const NewExamPage = () => {
               name="examDescription"
               required
             />
+            <Field
+              text="Score Per Correct Answer"
+              value={scorePerCorrectAnswer}
+              onChange={(e) => setScorePerCorrectAnswer(Number(e.target.value))}
+              name="scorePerCorrectAnswer"
+              required
+            />
+
             <input
               type="file"
               accept=".csv"

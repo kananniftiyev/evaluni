@@ -90,18 +90,19 @@ const ExamPage = () => {
     // Loop through each question in the exam
     exam.questions.forEach((question) => {
       const userAnswer = answers[question.id];
+      const scorePerCorrectAnswer = exam.scorePerCorrectAnswer || 1; // Default to 1 if not set
+
       // Check if the question is multiple choice or open-ended
       if (question.type === "multiple-choice" && userAnswer) {
         if (userAnswer === question.correctAnswer) {
-          score += 1; // Increment score for correct answer (option ID comparison)
+          score += scorePerCorrectAnswer; // Increment score by the custom points value
         }
       } else if (question.type === "open-ended" && userAnswer) {
-        // Handle open-ended question scoring (simple validation here)
         if (
           userAnswer.trim().toLowerCase() ===
-          question.correctAnswer.trim().toLowerCase() // Comparison for open-ended answers
+          question.correctAnswer.trim().toLowerCase()
         ) {
-          score += 1; // Increment score if the open-ended answer is correct
+          score += scorePerCorrectAnswer; // Increment score by the custom points value
         }
       }
     });
