@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Button from "../components/Button";
 import Field from "../components/Field";
 import Layout from "../components/Layout";
@@ -6,6 +7,8 @@ import { useMediaQuery } from "react-responsive";
 import axios from "axios";
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -95,7 +98,7 @@ const SignUpPage = () => {
           );
 
           if (postResponse.status === 201) {
-            console.log("User registered successfully:", postResponse.data);
+            navigate("/login");
           } else {
             console.error("Failed to register user.");
           }

@@ -15,6 +15,14 @@
       "email": "kananniftiyev010@gmail.com",
       "password": "123",
       "role": "student"
+    },
+    {
+      "id": "3c76",
+      "name": "test",
+      "surname": "test",
+      "email": "kanan@test.gom",
+      "password": "123",
+      "role": "student"
     }
   ],
   "exams": [
@@ -101,11 +109,11 @@
       "results": []
     },
     {
-      "id": "exam1731261092228",
-      "title": "asd",
-      "description": "",
-      "startDate": "2024-11-10T10:11:00.000Z",
-      "endDate": "2024-11-10T10:26:00.000Z",
+      "id": "exam1731337371521",
+      "title": "kanan",
+      "description": "123",
+      "startDate": "2024-11-11T15:00:00.000Z",
+      "endDate": "2024-11-11T15:15:00.000Z",
       "questions": [
         {
           "id": "q1",
@@ -117,16 +125,16 @@
               "text": "Atlantic"
             },
             {
+              "id": "a",
+              "text": "Pacific"
+            },
+            {
               "id": "d",
               "text": "Arctic"
             },
             {
               "id": "c",
               "text": "Indian"
-            },
-            {
-              "id": "a",
-              "text": "Pacific"
             }
           ],
           "correctAnswer": "Pacific"
@@ -137,20 +145,20 @@
           "question": "Which is the smallest continent?",
           "options": [
             {
-              "id": "a",
-              "text": "Australia"
+              "id": "b",
+              "text": "Europe"
             },
             {
               "id": "c",
               "text": "Asia"
             },
             {
-              "id": "b",
-              "text": "Europe"
-            },
-            {
               "id": "d",
               "text": "Africa"
+            },
+            {
+              "id": "a",
+              "text": "Australia"
             }
           ],
           "correctAnswer": "Australia"
@@ -161,20 +169,20 @@
           "question": "What is the chemical symbol for gold?",
           "options": [
             {
-              "id": "d",
-              "text": "Hg"
-            },
-            {
-              "id": "c",
-              "text": "Fe"
+              "id": "a",
+              "text": "Au"
             },
             {
               "id": "b",
               "text": "Ag"
             },
             {
-              "id": "a",
-              "text": "Au"
+              "id": "d",
+              "text": "Hg"
+            },
+            {
+              "id": "c",
+              "text": "Fe"
             }
           ],
           "correctAnswer": "Au"
@@ -185,20 +193,20 @@
           "question": "Who wrote 'Romeo and Juliet'?",
           "options": [
             {
-              "id": "b",
-              "text": "Moliere"
+              "id": "a",
+              "text": "Shakespeare"
             },
             {
               "id": "c",
               "text": "Dante"
             },
             {
-              "id": "a",
-              "text": "Shakespeare"
-            },
-            {
               "id": "d",
               "text": "Chaucer"
+            },
+            {
+              "id": "b",
+              "text": "Moliere"
             }
           ],
           "correctAnswer": "Shakespeare"
@@ -231,6 +239,19 @@
       "score": 1,
       "submittedAt": "2024-11-10T12:30:00Z",
       "id": "f53d"
+    },
+    {
+      "id": "c1e4",
+      "userId": "3c76",
+      "examId": "exam1731337371521",
+      "answers": {
+        "q1": "Pacific",
+        "q2": "Europe",
+        "q3": "Au",
+        "q4": "Shakespeare"
+      },
+      "score": 3,
+      "submittedAt": "2024-11-11T15:03:49.165Z"
     }
   ]
 }

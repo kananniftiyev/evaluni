@@ -142,3 +142,9 @@ textarea {
 .revoult-blue-text {
   color: #0666eb;
 }
+
+/* Add this CSS for smooth transitions on blur */
+.blur-image {
+  filter: blur(8px);
+  transition: filter 1s ease-in-out; /* Transition for blur effect */
+}
