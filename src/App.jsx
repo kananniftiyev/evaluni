@@ -1,12 +1,11 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout"; // Optional
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import NotFound from "./pages/NotFound";
 import IndexPage from "./pages/IndexPage";
 import Dashboard from "./pages/Dashboard";
-import CreateExamPage from "./pages/CreateExam";
+import CreateExam from "./pages/CreateExam";
 import ExamPage from "./pages/ExamPage";
 import ExamResultPage from "./pages/ExamResultPage";
 import MyExamsPage from "./pages/MyExamsPage";
@@ -23,7 +22,7 @@ function App() {
         />
         <Route
           path="/dashboard/new"
-          element={<ProtectedRoute element={<CreateExamPage />} />}
+          element={<ProtectedRoute element={<CreateExam />} />}
         />
         <Route
           path="/exam/:id"

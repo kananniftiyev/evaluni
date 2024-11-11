@@ -57,7 +57,8 @@ const ExamResultPage = () => {
 
       <div className="result-summary mb-4">
         <h2 className="text-xl font-semibold revoult-black-text">
-          Your Score: {result.score} / {exam.questions.length}
+          Your Score: {result.score} /{" "}
+          {exam.questions.length * exam.scorePerCorrectAnswer}
         </h2>
         <p className="text-green-500 revoult-black-text">
           {result.score === exam.questions.length

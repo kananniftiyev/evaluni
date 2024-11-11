@@ -8,6 +8,7 @@
     "npm:@vitejs/plugin-react@^4.3.2": "4.3.2_vite@5.4.8_@babel+core@7.25.7",
     "npm:axios@^1.7.7": "1.7.7",
     "npm:bcrypt@^5.1.1": "5.1.1",
+    "npm:chart.js@^4.4.6": "4.4.6",
     "npm:eslint-plugin-react-hooks@^5.1.0-rc.0": "5.1.0-rc-fb9a90fa48-20240614_eslint@9.12.0",
     "npm:eslint-plugin-react-refresh@~0.4.12": "0.4.12_eslint@9.12.0",
     "npm:eslint-plugin-react@^7.37.0": "7.37.1_eslint@9.12.0",
@@ -15,6 +16,7 @@
     "npm:globals@^15.9.0": "15.11.0",
     "npm:json-server@^1.0.0-beta.3": "1.0.0-beta.3",
     "npm:papaparse@^5.4.1": "5.4.1",
+    "npm:react-chartjs-2@^5.2.0": "5.2.0_chart.js@4.4.6_react@18.3.1",
     "npm:react-dom@^18.3.1": "18.3.1_react@18.3.1",
     "npm:react-responsive@10": "10.0.0_react@18.3.1",
     "npm:react-router-dom@^6.26.2": "6.26.2_react@18.3.1_react-dom@18.3.1__react@18.3.1",
@@ -347,6 +349,9 @@
         "@types/react",
         "react"
       ]
+    },
+    "@kurkle/color@0.3.2": {
+      "integrity": "sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw=="
     },
     "@mapbox/node-pre-gyp@1.0.11": {
       "integrity": "sha512-Yhlar6v9WQgUp/He7BdgzOz8lqMQ8sU+jkCq7Wx8Myc5YFJLbEe7lgui/V7G1qB1DJykHSGwreceSaD60Y0PUQ==",
@@ -787,6 +792,12 @@
     },
     "chalk@5.3.0": {
       "integrity": "sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w=="
+    },
+    "chart.js@4.4.6": {
+      "integrity": "sha512-8Y406zevUPbbIBA/HRk33khEmQPk5+cxeflWE/2rx1NJsjVWMPw/9mSP9rxHP5eqi6LNoPBVMfZHxbwLSgldYA==",
+      "dependencies": [
+        "@kurkle/color"
+      ]
     },
     "chokidar@4.0.1": {
       "integrity": "sha512-n8enUVCED/KVRQlab1hr3MVpcVMvxtZjmEa956u+4YijlmQED223XMSYj2tLuKvr4jcCTzNNMpQDUer72MMmzA==",
@@ -1897,6 +1908,13 @@
     },
     "punycode@2.3.1": {
       "integrity": "sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg=="
+    },
+    "react-chartjs-2@5.2.0_chart.js@4.4.6_react@18.3.1": {
+      "integrity": "sha512-98iN5aguJyVSxp5U3CblRLH67J8gkfyGNbiK3c+l1QI/G4irHMPQw44aEPmjVag+YKTyQ260NcF82GTQ3bdscA==",
+      "dependencies": [
+        "chart.js",
+        "react"
+      ]
     },
     "react-dom@18.3.1_react@18.3.1": {
       "integrity": "sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==",
